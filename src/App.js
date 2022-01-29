@@ -30,7 +30,7 @@ function App() {
   return (
     //
     <div className="container">
-      <section className="m-auto">
+      <section className="m-auto sub-container">
         <button
           onClick={() => {
             setOpen((prev) => !prev);

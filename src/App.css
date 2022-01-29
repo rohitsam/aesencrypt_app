@@ -1,6 +1,11 @@
 .container {
   display: flex;
   height: 100vh;
+  min-height: max-content;
+}
+
+.sub-container {
+  padding: auto;
 }
 
 .container-inner {
@@ -73,6 +78,12 @@
   .heading {
     font-size: larger;
     text-align: center;
+  }
+  .container-inner {
+    padding-bottom: 3rem;
+  }
+  .sub-container {
+    margin: 2rem auto;
   }
 }
 

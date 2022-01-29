@@ -6,10 +6,8 @@ import { aesDecrypt } from "./AESHelper";
 function App() {
   const [message, setMessage] = useState("");
   const [key, setKey] = useState("");
-
-  const [open, setOpen] = useState(false);
-
   const [result, setResult] = useState("");
+  const [openSurprize, setOpenSurprize] = useState(false);
 
   const handleEncrypt = () => {
     if (!message || !key) {
@@ -27,22 +25,43 @@ function App() {
     const decrypted = aesDecrypt(message, key);
     setResult(decrypted);
   };
+
+  const handleCopy = () => {
+    var resultText = document.getElementById("result");
+
+    resultText.select();
+    resultText.setSelectionRange(0, 99999);
+
+    navigator.clipboard.writeText(resultText.value);
+
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copied: " + resultText.value;
+  };
+
+  const outFunc = () => {
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copy to clipboard";
+  };
+
   return (
     //
     <div className="container">
       <section className="m-auto sub-container">
         <button
           onClick={() => {
-            setOpen((prev) => !prev);
+            setOpenSurprize((prev) => !prev);
           }}
           className="surprize surprize-absolute"
         >
           surprize!
         </button>
 
-        {open && (
+        {openSurprize && (
           <div className="modal-container">
-            <div className="modal grid gap-10" onClick={() => setOpen(false)}>
+            <div
+              className="modal grid gap-10"
+              onClick={() => setOpenSurprize(false)}
+            >
               <img
                 src="https://c.tenor.com/8EgAFZdO8JUAAAAC/sitpost.gif"
                 alt="funny"
@@ -96,13 +115,28 @@ function App() {
 
           {/* Result */}
           <section className="w-300 grid gap-5 mx-auto">
-            <label for="result">Result: </label>
+            <div className="flex justify-between">
+              <label htmlFor="result">Result: </label>
+              <div className="tooltip">
+                <button
+                  className="copyBtn"
+                  onClick={handleCopy}
+                  onMouseOut={outFunc}
+                >
+                  <span className="tooltiptext" id="myTooltip">
+                    Copy to clipboard
+                  </span>
+                  Copy Result
+                </button>
+              </div>
+            </div>
             <textarea
               id="result"
               className="textInputField"
               value={result}
               placeholder="Result"
               rows={18}
+              readOnly
             ></textarea>
           </section>
         </div>

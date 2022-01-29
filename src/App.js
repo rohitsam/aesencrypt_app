@@ -7,6 +7,8 @@ function App() {
   const [message, setMessage] = useState("");
   const [key, setKey] = useState("");
 
+  const [open, setOpen] = useState(false);
+
   const [result, setResult] = useState("");
 
   const handleEncrypt = () => {
@@ -29,6 +31,27 @@ function App() {
     //
     <div className="container">
       <section className="m-auto">
+        <button
+          onClick={() => {
+            setOpen((prev) => !prev);
+          }}
+          className="surprize surprize-absolute"
+        >
+          surprize!
+        </button>
+
+        {open && (
+          <div className="modal-container">
+            <div className="modal grid gap-10" onClick={() => setOpen(false)}>
+              <img
+                src="https://c.tenor.com/8EgAFZdO8JUAAAAC/sitpost.gif"
+                alt="funny"
+              />
+              <button className="surprize">close</button>
+            </div>
+          </div>
+        )}
+
         <h1 className="heading px-2 sm:heading-lg">
           Hex string AES Encrypt/Decrypt
         </h1>
@@ -39,7 +62,7 @@ function App() {
               <textarea
                 id="message"
                 type="text"
-                style={{ padding: "7px" }}
+                className="textInputField"
                 value={message}
                 onChange={(e) => {
                   setMessage(e.target.value);
@@ -53,7 +76,7 @@ function App() {
               <input
                 id="key"
                 type="text"
-                style={{ padding: "7px" }}
+                className="textInputField"
                 value={key}
                 onChange={(e) => {
                   setKey(e.target.value);
@@ -76,10 +99,10 @@ function App() {
             <label for="result">Result: </label>
             <textarea
               id="result"
-              style={{ width: "100%" }}
+              className="textInputField"
               value={result}
               placeholder="Result"
-              rows={16}
+              rows={18}
             ></textarea>
           </section>
         </div>

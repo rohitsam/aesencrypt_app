@@ -26,58 +26,63 @@ function App() {
     setResult(decrypted);
   };
   return (
-    // Hex string aes encrypt/decrypt
+    //
     <div className="container">
-      <section className="m-auto container-inner">
-        <div className="grid gap-10 w-300 mx-auto">
-          <section className="grid gap-5">
-            <label htmlFor="message">Message</label>
+      <section className="m-auto">
+        <h1 className="heading px-2 sm:heading-lg">
+          Hex string AES Encrypt/Decrypt
+        </h1>
+        <div className="container-inner px-2">
+          <div className="grid gap-10 w-300 mx-auto">
+            <section className="grid gap-5">
+              <label htmlFor="message">Message</label>
+              <textarea
+                id="message"
+                type="text"
+                style={{ padding: "7px" }}
+                value={message}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+                rows={10}
+              />
+            </section>
+
+            <section className="grid gap-5">
+              <label htmlFor="key">Key</label>
+              <input
+                id="key"
+                type="text"
+                style={{ padding: "7px" }}
+                value={key}
+                onChange={(e) => {
+                  setKey(e.target.value);
+                }}
+              />
+            </section>
+
+            <section className="flex gap-10">
+              <button className="btn" onClick={handleEncrypt}>
+                Encrypt
+              </button>
+              <button className="btn" onClick={handleDecrypt}>
+                Decrypt
+              </button>
+            </section>
+          </div>
+
+          {/* Result */}
+          <section className="w-300 grid gap-5 mx-auto">
+            <label for="result">Result: </label>
             <textarea
-              id="message"
-              type="text"
-              style={{ padding: "7px" }}
-              value={message}
-              onChange={(e) => {
-                setMessage(e.target.value);
-              }}
-              rows={10}
-            />
-          </section>
-
-          <section className="grid gap-5">
-            <label htmlFor="key">Key</label>
-            <input
-              id="key"
-              type="text"
-              style={{ padding: "7px" }}
-              value={key}
-              onChange={(e) => {
-                setKey(e.target.value);
-              }}
-            />
-          </section>
-
-          <section className="flex gap-10">
-            <button className="btn" onClick={handleEncrypt}>
-              Encrypt
-            </button>
-            <button className="btn" onClick={handleDecrypt}>
-              Decrypt
-            </button>
+              id="result"
+              style={{ width: "100%" }}
+              value={result}
+              placeholder="Result"
+              rows={16}
+            ></textarea>
           </section>
         </div>
-
-        {/* Result */}
-        <section className="w-300 grid gap-5 mx-auto">
-          <label for="result">Result: </label>
-          <textarea
-            id="result"
-            style={{ width: "100%" }}
-            value={result}
-            placeholder="Result"
-            rows={16}
-          ></textarea>
-        </section>
       </section>
     </div>
   );

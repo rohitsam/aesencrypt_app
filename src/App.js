@@ -26,27 +26,11 @@ function App() {
     setResult(decrypted);
   };
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
-      <section
-        style={{
-          margin: "auto",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "20px",
-          paddingLeft: "2rem",
-          paddingRight: "2rem",
-        }}
-      >
-        <div
-          style={{
-            display: "grid",
-            gap: "10px",
-            width: "300px",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          <div style={{ display: "grid", gap: "5px" }}>
+    // Hex string aes encrypt/decrypt
+    <div className="container">
+      <section className="m-auto container-inner">
+        <div className="grid gap-10 w-300 mx-auto">
+          <section className="grid gap-5">
             <label htmlFor="message">Message</label>
             <textarea
               id="message"
@@ -58,9 +42,9 @@ function App() {
               }}
               rows={10}
             />
-          </div>
+          </section>
 
-          <div style={{ display: "grid", gap: "5px" }}>
+          <section className="grid gap-5">
             <label htmlFor="key">Key</label>
             <input
               id="key"
@@ -71,48 +55,20 @@ function App() {
                 setKey(e.target.value);
               }}
             />
-          </div>
+          </section>
 
-          <div style={{ display: "flex", gap: "10px" }}>
-            <button
-              style={{
-                width: "100%",
-                borderRadius: "4px",
-                border: "none",
-                padding: "10px",
-                cursor: "pointer",
-                backgroundColor: "darkblue",
-                color: "white",
-              }}
-              onClick={handleEncrypt}
-            >
+          <section className="flex gap-10">
+            <button className="btn" onClick={handleEncrypt}>
               Encrypt
             </button>
-            <button
-              style={{
-                width: "100%",
-                borderRadius: "4px",
-                border: "none",
-                padding: "10px",
-                cursor: "pointer",
-                backgroundColor: "darkblue",
-                color: "white",
-              }}
-              onClick={handleDecrypt}
-            >
+            <button className="btn" onClick={handleDecrypt}>
               Decrypt
             </button>
-          </div>
+          </section>
         </div>
-        <div
-          style={{
-            width: "300px",
-            display: "grid",
-            gap: "5px",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
+
+        {/* Result */}
+        <section className="w-300 grid gap-5 mx-auto">
           <label for="result">Result: </label>
           <textarea
             id="result"
@@ -121,7 +77,7 @@ function App() {
             placeholder="Result"
             rows={16}
           ></textarea>
-        </div>
+        </section>
       </section>
     </div>
   );

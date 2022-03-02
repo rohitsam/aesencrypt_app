@@ -6,6 +6,7 @@ import { aesDecrypt } from "./AESHelper";
 function App() {
   const [message, setMessage] = useState("");
   const [key, setKey] = useState("");
+  const [deviceid, setdevid] = useState("");
   const [result, setResult] = useState("");
   const [openSurprize, setOpenSurprize] = useState(false);
 
@@ -26,6 +27,30 @@ function App() {
     setResult(decrypted);
   };
 
+  const getDevSubTopic = ()=>{
+
+    var myHeaders = new Headers();
+    myHeaders.append("g_key", "interop_is_lowkey_selfish");
+    myHeaders.append("Authorization", "Bearer Sa30JHgxHjE0.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDQ2NDYxMzk4MDMsImVhdCI6MTY0NzIzODEzOTgwM30.38pAtPxmj8lqo926cLYB75Kn_L7rMVgHOvkoh69KH80");
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "device_id": "f7e656"
+      });
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://platform.kazam.in/getSubtopic", requestOptions)
+  .then(response => response.text())
+  .then(result => setKey(JSON.parse(result).sub_topic+'168'))
+  .catch(error => console.log('error', error));
+  
+  }
   const handleCopy = () => {
     var resultText = document.getElementById("result");
 
@@ -102,6 +127,7 @@ function App() {
                 }}
               />
             </section>
+            
 
             <section className="flex gap-10">
               <button className="btn" onClick={handleEncrypt}>
@@ -111,6 +137,24 @@ function App() {
                 Decrypt
               </button>
             </section>
+            <section className="grid gap-6">
+              <label htmlFor="deviceid">DeviceId</label>
+              <input
+                id="deviceid"
+                type="text"
+                className="textInputField"
+                value={deviceid}
+                onChange={(e) => {
+                  setdevid(e.target.value);
+                }}
+              />
+            </section>
+            <section className="flex gap-10">
+              <button className="btn" onClick={getDevSubTopic}>
+                get device key
+              </button>
+            </section>
+
           </div>
 
           {/* Result */}

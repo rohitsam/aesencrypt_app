@@ -6,7 +6,7 @@ import { aesDecrypt } from "./AESHelper";
 function App() {
   const [message, setMessage] = useState("");
   const [key, setKey] = useState("");
-  const [deviceid, setdevid] = useState("");
+  const [deviceid, setDeviceId] = useState("");
   const [result, setResult] = useState("");
   const [openSurprize, setOpenSurprize] = useState(false);
 
@@ -35,22 +35,23 @@ function App() {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      "device_id": "f7e656"
+      "device_id": deviceid
       });
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
 
-fetch("https://platform.kazam.in/getSubtopic", requestOptions)
-  .then(response => response.text())
-  .then(result => setKey(JSON.parse(result).sub_topic+'168'))
-  .catch(error => console.log('error', error));
+    fetch("https://platform.kazam.in/getSubtopic", requestOptions)
+      .then(response => response.text())
+      .then(result => setKey(JSON.parse(result).sub_topic+'168'))
+      .catch(error => console.log('error', error));
   
   }
+  
   const handleCopy = () => {
     var resultText = document.getElementById("result");
 
@@ -145,7 +146,7 @@ fetch("https://platform.kazam.in/getSubtopic", requestOptions)
                 className="textInputField"
                 value={deviceid}
                 onChange={(e) => {
-                  setdevid(e.target.value);
+                  setDeviceId(e.target.value);
                 }}
               />
             </section>

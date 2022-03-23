@@ -31,7 +31,7 @@ function App() {
 
     var myHeaders = new Headers();
     myHeaders.append("g_key", "interop_is_lowkey_selfish");
-    myHeaders.append("Authorization", "Bearer Sa30JHgxHjE0.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDQ2NDYxMzk4MDMsImVhdCI6MTY0NzIzODEzOTgwM30.38pAtPxmj8lqo926cLYB75Kn_L7rMVgHOvkoh69KH80");
+    myHeaders.append("Authorization", "Bearer 3S0cfyRKey20.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDU1NDA0MjA4ODEsImVhdCI6MTY1MDcyNDQyMDg4MX0.90989ZY81d7MbNvFymX2STnBqHVUdpuBdwLn60A0Tps");
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({

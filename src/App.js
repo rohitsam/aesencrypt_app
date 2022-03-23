@@ -146,7 +146,7 @@ function App() {
                 className="textInputField"
                 value={deviceid}
                 onChange={(e) => {
-                  setDeviceId(e.target.value);
+                  setDeviceId(e.target.value.toLowerCase());
                 }}
               />
             </section>

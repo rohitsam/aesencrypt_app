@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { aesEncrypt, aesEncryptbase64 } from "./AESHelper";
 import { aesDecrypt,aesDecryptbase64 } from "./AESHelper";
+import { v4 as uuidv4 } from 'uuid'
 
 function App() {
   const [message, setMessage] = useState("");
@@ -77,6 +78,18 @@ function App() {
     var tooltip = document.getElementById("myTooltip");
     tooltip.innerHTML = "Copied: " + resultText.value;
   };
+  const genstart = () => {
+  
+
+    var start_packet = {"cp_cmd":7,"request_id":uuidv4(),
+    "txd_details":{"txd_id":uuidv4(),"start_time":Math.floor(Date.now() / 1000),"duration":800,"usage_limit":10000,"user_id":uuidv4()}}
+    setMessage(JSON.stringify(start_packet));
+    console.log(JSON.stringify(start_packet));
+  };
+  const gentimesync = () => {
+    var timepacket = {"cp_cmd":12,"request_id":uuidv4(),"time":Math.floor(Date.now() / 1000)};
+    setMessage(JSON.stringify(timepacket));
+  };
 
   const outFunc = () => {
     var tooltip = document.getElementById("myTooltip");
@@ -150,7 +163,15 @@ function App() {
                 onClick={(e) => setDoBase64(e.target.checked)}
                 id="doBase64"
               />
-              <label htmlFor="doBase64">Base64</label>
+              <label htmlFor="doBase64"> Base64 </label>
+              <button className="btn" onClick={gentimesync} style={{ fontSize: '12px', padding: '3px', width: '50px',color:"white",backgroundColor:"green" }}>
+                Time
+              </button>
+                   
+              <button className="btn" onClick={genstart} style={{ fontSize: '12px', padding: '3px', width: '50px',color:"white",backgroundColor:"green" }} >
+                Start
+              </button>
+                
             </div>
 
             <section className="flex gap-10">
@@ -206,8 +227,22 @@ function App() {
               readOnly
             ></textarea>
           </section>
+      
+
+          
+                
+
+
         </div>
       </section>
+      
+
+      
+
+
+      
+      
+      
     </div>
   );
 }

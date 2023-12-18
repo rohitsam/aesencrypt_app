@@ -91,6 +91,10 @@ function App() {
     setMessage(JSON.stringify(timepacket));
   };
 
+  const genstop = () => {
+    var timepacket = {"cp_cmd":8,"request_id":uuidv4()};
+    setMessage(JSON.stringify(timepacket));
+  };
   const outFunc = () => {
     var tooltip = document.getElementById("myTooltip");
     tooltip.innerHTML = "Copy to clipboard";
@@ -170,6 +174,10 @@ function App() {
                    
               <button className="btn" onClick={genstart} style={{ fontSize: '12px', padding: '3px', width: '50px',color:"white",backgroundColor:"green" }} >
                 Start
+              </button>
+
+              <button className="btn" onClick={genstop} style={{ fontSize: '12px', padding: '3px', width: '50px',color:"white",backgroundColor:"green" }} >
+                Stop
               </button>
                 
             </div>
